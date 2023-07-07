@@ -5,7 +5,7 @@
     <div class="cards-form">
       <form [formGroup]="RegisterForm" (ngSubmit)="submit()"  >
         <div class="form-group">
-          <label>Card Name</label>
+          <label>Card Holder Name</label>
           <input type="text" formControlName="cardHolderName"   />
         </div>
         <div class="form-group">
@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="form-group">
-       <button  class="btn btn-success" mat-raised-button 
+       <button  class="btn btn-success" mat-raised-button
        matTooltip="Info about the action"  type="submit">{{buttonTex}}</button>
         </div>
       </form>
@@ -39,8 +39,9 @@
         <span>{{card.cardNumber}}</span>
       </div>
       <div class="card-row-action">
-      <a ><i class="fa fa-trash " aria-hidden="true"></i></a>
-      </div>
+        <a  (click)="delete(card.id)"><i class="fa fa-trash " aria-hidden="true"></i></a>
+        </div>
+
       </div>
     </div>
     <!-- <div class="cards-grid">

@@ -1,8 +1,9 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CardsService } from '../Service/cards.service';
 import { Card } from '../Models/card.model';
-import {MatTooltipModule} from '@angular/material/tooltip';
+
 @Component({
   selector: 'app-reactiveform',
   templateUrl: './reactiveform.component.html',
@@ -13,7 +14,7 @@ export class ReactiveformComponent implements OnInit {
   RegisterForm:FormGroup;
   cards:Card[]=[];
   buttonTex="Save";
-  constructor( private _fb:FormBuilder,private _cardService:CardsService) { }
+  constructor( private _fb:FormBuilder,private _cardService:CardsService,private _toaster:ToastrService) { }
 
   ngOnInit(): void {
     this.setRegisterForm();
@@ -33,6 +34,7 @@ export class ReactiveformComponent implements OnInit {
     if(this.RegisterForm.controls['id'].value===""){
 
       this._cardService.addCard(this.RegisterForm.value).subscribe(res=>{
+        this._toaster.success("Your card details has been added successfully")
        this.getAllCards();
        this.RegisterForm.reset({
         id: "",
@@ -52,7 +54,7 @@ export class ReactiveformComponent implements OnInit {
 
     this.buttonTex="Update";
     this._cardService.updateCard(card).subscribe(res=>{
-      debugger
+      this._toaster.success("Your Crd details has been edited successfully")
       this.getAllCards();
       this.RegisterForm.reset({
         id: "",
@@ -77,7 +79,12 @@ export class ReactiveformComponent implements OnInit {
 
     let card=this.cards.find((card:Card)=>card.id==id);
     this.RegisterForm.patchValue(card);
-
+ }
+ delete(id:any){
+    this._cardService.deleteCard(id).subscribe(res=>{
+      this._toaster.success("Your Card detalis has been deleted successfully")
+      this.getAllCards();
+    })
  }
   }
 

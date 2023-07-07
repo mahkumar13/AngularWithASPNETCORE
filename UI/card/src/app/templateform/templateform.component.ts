@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Card } from '../Models/card.model';
 import { CardsService } from '../Service/cards.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-templateform',
@@ -19,7 +20,7 @@ export class TemplateformComponent implements OnInit {
     expiryMonth: '',
     expirtYear: ''
   }
-  constructor(private _cardsService:CardsService){
+  constructor(private _cardsService:CardsService,private _toaster:ToastrService){
 
   }
   ngOnInit(){
@@ -28,10 +29,12 @@ export class TemplateformComponent implements OnInit {
   getAllCards(){
     this._cardsService.getAllCards().subscribe(res=>{
       this.cards=res;
+
     })
   }
   delete(id:any){
      this._cardsService.deleteCard(id).subscribe(res=>{
+      this._toaster.success("Your Card Details has been deleted successfully")
       this.getAllCards();
      })
   }
@@ -46,7 +49,7 @@ export class TemplateformComponent implements OnInit {
     this.ButtonText="Save"
     this._cardsService.addCard(this.card).subscribe(res=>
       {
-        debugger
+        this._toaster.success(" Crad Details Added successfully")
       this.getAllCards();
       this.card={
         id: "",
@@ -58,6 +61,7 @@ export class TemplateformComponent implements OnInit {
       }
 
      })
+
    }
    else{
     this.updateCard(this.card);
@@ -68,6 +72,7 @@ export class TemplateformComponent implements OnInit {
 
     this._cardsService.updateCard(card).subscribe(res=>{
       debugger
+      this._toaster.success("Your card details has been edited successfully")
       this.getAllCards();
       this.ButtonText="Save"
       this.card={
