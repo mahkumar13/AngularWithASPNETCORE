@@ -6,28 +6,46 @@
       <form [formGroup]="RegisterForm" (ngSubmit)="submit()"  >
         <div class="form-group">
           <label>Card Holder Name</label>
-          <input type="text" formControlName="cardHolderName"   />
+          <input type="text" formControlName="cardHolderName" [ngClass]="{'is-invalid':Submitted && ctrl['cardHolderName'].errors}"  />
+          <div *ngIf="Submitted && ctrl['cardHolderName'].errors" class="invalid-feedback">
+          <div *ngIf="ctrl['cardHolderName'].errors['required']"> Card Holder Name is Required</div>
+          </div>
         </div>
         <div class="form-group">
           <label>Card Number</label>
-          <input type="text" formControlName="cardNumber" />
+          <input type="text" formControlName="cardNumber" [ngClass]="{'is-invalid':Submitted && ctrl['cardNumber'].errors}"  />
+          <div *ngIf="Submitted && ctrl['cardNumber'].errors" class="invalid-feedback">
+            <div *ngIf="ctrl['cardNumber'].errors['required']"> Card Number is Required</div>
+            </div>
         </div>
         <div class="form-group form-group-inline">
           <div>
             <label>CVC</label>
-            <input type="text" formControlName="cvc"/>
+            <input type="password" formControlName="cvc"/>
+            <div *ngIf="Submitted && ctrl['cvc'].errors" class="invalid-feedback" [ngClass]="{'is-invalid':Submitted && ctrl['cvc'].errors}">
+              <div *ngIf="ctrl['cardNumber'].errors['required']"> CVC is Required</div>
+              <div *ngIf="ctrl['cardNumber'].errors['maxlength']"> CVC Should be less than 3 char</div>
+              </div>
           </div>
           <div>
             <label>Expiry Month</label>
-            <input type="text" formControlName="expiryMonth" />
+            <input type="text" formControlName="expiryMonth" [ngClass]="{'is-invalid':Submitted && ctrl['expiryMonth'].errors}"  />
+            <div *ngIf="Submitted && ctrl['expiryMonth'].errors" class="invalid-feedback">
+            <div *ngIf="ctrl['expiryMonth'].errors['required']"> Expiry Month is required</div>
+            <div *ngIf="ctrl['expiryMonth'].errors['maxlength']"> Expiry Month should is in 2 digits</div>
+            </div>
           </div>
           <div>
             <label>Expiry Year</label>
-            <input type="text" formControlName="expirtYear"/>
+            <input type="text" formControlName="expirtYear"  [ngClass]="{'is-invalid':Submitted && ctrl['expirtYear'].errors}"/>
+            <div *ngIf="Submitted && ctrl['expirtYear'].errors" class="invalid-feedback">
+            <div *ngIf="ctrl['expirtYear'].errors['required']"> Expiry Month is required</div>
+            <div *ngIf="ctrl['expirtYear'].errors['maxlength']"> Expiry Month should is in 4 digits</div>
+            </div>
           </div>
         </div>
         <div class="form-group">
-       <button  class="btn btn-success" mat-raised-button
+       <button  class="btn btn-success mr-5" mat-raised-button
        matTooltip="Info about the action"  type="submit">{{buttonTex}}</button>
         </div>
       </form>

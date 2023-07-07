@@ -31,7 +31,7 @@
    font-weight: bold;
    color: blue;
  }
- form input[type="text"],form input[type="number"]{
+ form input[type="text"],form input[type="number"],form [type='password']{
    width: 100%;
    padding: 0.5em 0.3em;
    background-color: aliceblue;
