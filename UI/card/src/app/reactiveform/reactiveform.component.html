@@ -1,0 +1,60 @@
+
+<div class="container">
+  <h2>ANGULAR WITH ASP.NET CORE</h2>
+  <div class="cards-container">
+    <div class="cards-form">
+      <form [formGroup]="RegisterForm" (ngSubmit)="submit()"  >
+        <div class="form-group">
+          <label>Card Name</label>
+          <input type="text" formControlName="cardHolderName"   />
+        </div>
+        <div class="form-group">
+          <label>Card Number</label>
+          <input type="text" formControlName="cardNumber" />
+        </div>
+        <div class="form-group form-group-inline">
+          <div>
+            <label>CVC</label>
+            <input type="text" formControlName="cvc"/>
+          </div>
+          <div>
+            <label>Expiry Month</label>
+            <input type="text" formControlName="expiryMonth" />
+          </div>
+          <div>
+            <label>Expiry Year</label>
+            <input type="text" formControlName="expirtYear"/>
+          </div>
+        </div>
+        <div class="form-group">
+       <button  class="btn btn-success" mat-raised-button 
+       matTooltip="Info about the action"  type="submit">{{buttonTex}}</button>
+        </div>
+      </form>
+    </div>
+    <div class="cards-grid">
+      <div  class="card-row"  *ngFor="let card of cards" >
+      <div  (click)="edit(card.id)" class="card-row-details">
+        <span>{{card.cardHolderName}}</span>
+        <span>{{card.cardNumber}}</span>
+      </div>
+      <div class="card-row-action">
+      <a ><i class="fa fa-trash " aria-hidden="true"></i></a>
+      </div>
+      </div>
+    </div>
+    <!-- <div class="cards-grid">
+      <div class="card-row">
+      <div class="card-row-details">
+        <span>Mahendra</span>
+        <span>9876556789876</span>
+      </div>
+      <div class="card-row-action">
+      <a ><i class="fa fa-trash" aria-hidden="true"></i></a>
+      </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+
+

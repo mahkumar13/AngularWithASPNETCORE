@@ -1,0 +1,12 @@
+.container{
+  text-align: center;
+  border: 5px;
+  background-color: rgb(102, 71, 76);
+}
+.active{
+  background-color: rgb(108, 168, 108);
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+
+}
